@@ -51,19 +51,19 @@ public class TransactionDataController {
 	@PostMapping()
 	public void postData(@RequestBody TransactionData transactionData) throws ResourceNotFoundException {
 		System.out.println(transactionData);
-//		CustomerData sender = customerDataService.find(transactionData.getSender_id());
-//		System.out.println("Befre Updation sender:"+sender);
-//		sender.setClear_balance(sender.getClear_balance()-transactionData.getAmount());
-//		customerDataService.update(sender);
-//		System.out.println("After Updattion:"+sender);
-//		if(transactionData.getTransfer_type().equals("Bank Transfer")) {
-//			CustomerData receiver = customerDataService.find(transactionData.getReceiver_id());
-//			System.out.println("Befre Updation receiverer:"+receiver);
-//			receiver.setClear_balance(receiver.getClear_balance()+transactionData.getAmount());
-//			customerDataService.update(receiver);
-//			System.out.println("after Updation receiverer:"+receiver);
-//		}
-//		transactionDataService.save(transactionData);
+		CustomerData sender = customerDataService.find(transactionData.getSender_id());
+		System.out.println("Before Updation sender:"+sender);
+		sender.setClear_balance(sender.getClear_balance()-transactionData.getAmount());
+		customerDataService.update(sender);
+		System.out.println("After Updation:"+sender);
+		if(transactionData.getTransfer_type().equals("Bank Transfer")) {
+			CustomerData receiver = customerDataService.find(transactionData.getReceiver_id());
+			System.out.println("Before Updation receiverer:"+receiver);
+			receiver.setClear_balance(receiver.getClear_balance()+transactionData.getAmount());
+			customerDataService.update(receiver);
+			System.out.println("after Updation receiverer:"+receiver);
+		}
+		transactionDataService.save(transactionData);
 	}
 
 }
